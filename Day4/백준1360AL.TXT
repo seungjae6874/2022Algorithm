@@ -1,0 +1,13 @@
+이런 문제에서는 모든 초에 대한 값들을 세팅하면 안된다.
+주어진 값들에 대해서만 DICT로 KEY VALUE 셋하고
+키포인트는 :
+for i in range(len[q]-1,-1,-1):
+	if q[i][0] >= curtime - backtime: continue로 넘어가기
+	else일때 아래 처리
+UNDO일때 현재 시간 - BACK하는 시간보다 작은 값들 중에서
+INPUT으로 TYPE이 들어온 '초'를 찾는 것이다.
+해당 초를 찾아내면 반복문에서 BREAK로 탈출하는 것이 필수
+
+그리고 찾으면 FLAG = True로 주고
+반복문 밖에서 아직 false이면 이는 해당 인덱스가 0을 넘어갔다는 소리
+즉 문자열은 '' 공백이 된다.
