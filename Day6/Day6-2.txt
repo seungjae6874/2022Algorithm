@@ -1,0 +1,72 @@
+import java.util.*;
+class Solution {
+    public int[] solution(int[] answers) {
+        int[] answer = {};
+        int[] fi = {1,2,3,4,5}; //주기 5
+        int[] se = {2,1,2,3,2,4,2,5};//주기 8
+        int[] th = {3,3,1,1,2,2,4,4,5,5}; //주기 10
+        ArrayList<Integer> f = new ArrayList<Integer>();
+        ArrayList<Integer> s = new ArrayList<Integer>();
+        ArrayList<Integer> t = new ArrayList<Integer>();
+        int fcnt=0;
+        int scnt=0;
+        int tcnt =0;
+        //정답과 푼답을 비교해서 카운트가 제일 큰 사람 정렬 출력
+        //1번학생 1,2,3,4,5 -> 6으로 나눈 나머지, 길이는 answers 길이만큼
+        //2번학생 홀수번째는 2, 짝수번째는 1342
+        //System.out.println(answers.length);
+        for (int i = 0; i < answers.length; i++){
+            f.add(fi[i%5]);
+            s.add(se[i%8]);
+            t.add(th[i%10]);
+            //System.out.println(fi[i%5]);
+        }
+        //정답배열과 비교해서 count 계산
+        for (int j =0; j< answers.length; j++){
+            if(answers[j] == f.get(j)){
+                fcnt++;
+            }
+            if(answers[j] == s.get(j)){
+                scnt++;
+            }
+            if(answers[j] == t.get(j)){
+                tcnt++;
+            }
+        }
+        ArrayList<Integer> big = new ArrayList<Integer>();
+        big.add(fcnt);
+        big.add(scnt);
+        big.add(tcnt);
+        Collections.sort(big); //array 정렬은 Collections, 배열 정렬은 Arrays
+        //제일 많이 맞춘 갯수체크
+        int bigg = big.get(2);
+        HashMap<Integer,Integer> map = new HashMap<Integer,Integer>();
+        map.put(1,fcnt);
+        map.put(2,scnt);
+        map.put(3,tcnt);
+        List<Map.Entry<Integer,Integer>> entryList = new LinkedList<>(map.entrySet());
+        entryList.sort(Map.Entry.comparingByValue());
+        //System.out.println(entryList.indexOf()); 리스트의 인덱스 찾기는 indexOf
+        int ca = 0;
+        ArrayList<Integer> allkey = new ArrayList<Integer>();
+        for (Integer key: map.keySet()){
+            //keySet()은 키값모음, entrySet()은 key,value모음
+            if (map.get(key) == bigg){
+                ca++;
+                allkey.add(key);
+            }
+        }
+       
+        answer = new int[ca];
+        if (ca ==0){
+            return answer;
+        }
+        else{
+            for (int i =0; i < ca; i++){
+               answer[i] = allkey.get(i);
+            }
+            return answer;    
+        }
+        
+    }
+}

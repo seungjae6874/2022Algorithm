@@ -1,0 +1,20 @@
+먼저 각 수포자가  만들어내는 배열의 주기를 찾아낸다.
+1번 5개, 2번 8개, 3번 10개이다.
+answers의 길이만큼으로 반복문을 돌며 그 길이만큼 수포자의 정답지를 만들어낸다 %나머지 사용.
+이후 답과 수포자의 정답들의 맞는개수를 배열에 넣어서 [f,s,t]로 저장.
+배열의 정렬은 Arrays.sort(), arraylist의 정렬은 Collections.sort()
+가장 큰값을 big에 갖고 있는다.
+
+번외방법) HashMap으로 수포자번호와 맞춘 개수를 갖고 있기.
+value값으로 정렬하려면 해시맵의 내장메서드 중 entrySet()을 이용한다.
+먼저 리스트로 해시맵 변경
+List<Map.Entry<Integer,Integer> entrylist = new LinkedList<>(map.entrySet());
+entrylist.sort(Map.Entry.comparingByValue());
+즉 map안에 Entry 안에 comparingByValue() 내장함수를 불러서 밸류값으로 리스트를 정렬
+for(Map.Entry<String, Integer> entry : entryList){
+    System.out.println("key : " + entry.getKey() + ", value : " + entry.getValue());
+} 이렇게 list타입이면서 안에 해시맵을 갖고있는객체에 대해 getKey와 getValue로 접근 가능하다.
+
+마지막에는 big과 동일한 정답갯수를 갖는 key를 answer에 담으면 된다.
+for (Map.Entry<Integer,Integer> entry: entryList){
+	if (entry.getValue() == big){ answer에 entry.getKey()를 저장}
