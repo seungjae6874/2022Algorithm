@@ -1,0 +1,11 @@
+자바의 해시 문제에서는 HashMap<String,Integer> map = new HashMap<>();
+와 같은 key value 값 세팅으로 문제를 풀 수 있다.
+hashmap의 key값에 대한 value 매핑은
+map.put(key) = value;로 선언
+또한 동일 key값에 대한 value를 replace가 아닌 하나씩 빼거나 변경하고 싶을 때는
+getOrDefault(key,0)과 같은 값을 선언하여 변경 가능
+ex) map.put(key, getOrDefault(key,0) +1); => 동일 키 값에 대해 value 1씩 증가
+따라서 참가한 선수들의 key값에 대해 value를 증가시키고
+완주한 선수들의 배열 내 이름을 key값으로 map에 해당 이름을 key로 하는 value를 -1처리한다.
+map.put(key, map.get(key)-1);
+마지막으로 map을 돌면서 value가 0보다 큰 key를 찾아낸다 (해당 key가 완주하지 못한 선수의 이름)

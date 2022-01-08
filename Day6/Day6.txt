@@ -1,0 +1,28 @@
+import java.util.*;
+class Solution {
+    public String solution(String[] participant, String[] completion) {
+        String answer = "";
+        //참가한 선수들의 이름을 key로 value를 증가시킨다. 
+        //해시맵의 같은 키값의 value를 증가시킬땐 getOrDefault(key,0(초기값)+1)
+        //키값에 대한 value를 차감하고 싶을 땐 put(key,map.get(key)-1)
+        //참가 - 완주를 했을 때 value가 0보다 크다면 그사람은 완주못함.
+        //해당 key를 출력
+        HashMap<String,Integer> parti = new HashMap<>();
+        for (String name : participant){
+            parti.put(name, parti.getOrDefault(name,0)+1);
+        }
+        for (String name : completion){
+            parti.put(name,parti.get(name)-1);
+        }
+        for (String name : parti.keySet()){ //parti 해시맵의 키만 속한 리스트
+        
+            if (parti.get(name) != 0){
+                answer= name;
+                
+            }
+            
+        }
+        
+        return answer;
+    }
+}
