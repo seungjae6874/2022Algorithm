@@ -1,0 +1,37 @@
+import java.util.*;
+public class Main{
+    public static void main(String[] args){
+        Scanner in = new Scanner(System.in);
+        int fi = in.nextInt();
+        int se = in.nextInt();
+        
+        System.out.println(gcd(fi,se,0));
+        System.out.println(gcd(fi,se,1));
+        //0일때 최대공약수, 1일때 최소공배수를 출력
+        
+    }
+    //유클리드 호제법 최소공배수는 a*b/최대공약수
+    //30%18 = 12 -> 30를 18로 , 18을 12으로 18%12 = 6
+    //18은 12로 12은 6으로 12%6 = 0이 12=> 6, 6 = 0이되었으므로 
+    //최대공약수는 6
+    public static int gcd(int fi, int se, int flag){
+        int fir = fi;
+        int sec = se;//이후에 최소공배수를 구하기 위함
+        if (se>fi){
+            int temp = se;
+            se = fi;
+            fi = temp;
+        }
+        while(se != 0){
+            int tmp = fi%se;
+            fi = se;
+            se = tmp;
+        }
+        if(flag == 0){
+            return fi;
+        }
+        else{
+            return (fir*sec)/fi;
+        }
+    }
+}
