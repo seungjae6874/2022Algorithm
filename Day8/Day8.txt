@@ -1,0 +1,27 @@
+import java.util.*;
+
+public class Main{
+    public static void main(String[] args){
+        Scanner in = new Scanner(System.in);
+        int num = in.nextInt();
+        System.out.println(fibo(num));
+            
+    }
+    public static int fibo(int n){
+        if (n==0) return 0;
+        if (n==1) return 1;
+        if (n==2) return 1;
+        else{
+            int fi = 1;//n==3일 때는 n=2일때와 1일때의 합이므로 갖고있어야함.
+            int se = 1;
+            int sum = 2;//초기 sum값은 n=3일때의 피보나치 값
+            for(int i = 3; i <= n; i++){
+                sum = fi+se;// n일때의 피보나치 값을 갱신
+                fi = se; // n-2값을 갱신
+                se = sum;// n-1값을 갱신
+            }
+            return sum;
+        }
+        
+    }
+}
