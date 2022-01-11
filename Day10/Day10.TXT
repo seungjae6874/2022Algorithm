@@ -1,0 +1,42 @@
+import java.util.*;
+import java.io.*;
+public class Main{
+    static int list[];
+    static int n,m;
+    static BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+    static void perm(int depth) throws IOException {
+        
+        if(depth == m){
+            for(int j =0; j<m; j++){
+                bw.write(String.valueOf(list[j])+" ");
+    
+            }
+            bw.newLine();
+            return;
+        }
+       
+        for(int i = 1; i <=n; i++){
+            list[depth] = i;
+            perm(depth+1);
+        
+        }
+    }
+    public static void main(String[] args) throws IOException{
+        BufferedReader br = new BufferedReader(new InputStreamReader
+                                              (System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine());
+        
+        n = Integer.parseInt(st.nextToken());
+        m = Integer.parseInt(st.nextToken());
+        //1~a개중 b개를 뽑아 순서있는 순열 12와 21은 다름
+        list = new int[m];
+        perm(0);
+        
+        br.close();
+        bw.flush();
+        bw.close();
+    }
+    //n개중 r개 뽑는 것, 
+    //arr은 뽑을 배열 ,output은 뽑는 결과, depth는 뽑아진 현재까지 갯수
+    
+}
