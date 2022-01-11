@@ -1,0 +1,24 @@
+import java.util.*;
+public class Main{
+    public static void main(String args[]){
+        Scanner in = new Scanner(System.in);
+        
+        int num = in.nextInt();
+        in.close();
+        int save = num;
+        int cnt = 0;
+        
+        while(true){
+            
+            //t의 십의 자리 수는 num의 1의 자리수이다.
+            //t의 1의자리 수는 num의 자리수 합을 10으로 나눈 나머지이다.
+            //10보다 작아도 상관없음
+            num = (num%10)*10 +(((num/10)+(num%10))%10);
+            cnt++;
+            if(num == save){
+               break;
+            }
+        }
+        System.out.println(cnt);
+    }
+}
