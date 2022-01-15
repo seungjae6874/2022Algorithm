@@ -1,0 +1,32 @@
+해당 최소값을 찾을 때는 반드시 최대값을 확인해본다.
+또한 반드시 앞으로는 Scanner 말고 
+1. BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+2. StringTokenizer st = new StringTokenizer(br.readLine());
+
+//Scanner 대신 BufferedReader를 통해 inputStreamReader를 읽고
+//입력받는 것은 StringTokenizer를 통해 br.readLine()한줄 씩을 읽는데
+//StringTokenizer를 사용해서 공백 단위로 구분한다.
+
+전체 선언
+
+BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+StringTokenizer st = new StringTokenizer(br.readLine());
+
+이제 입력값이 10 8이면 
+long x = Long.parseLong(st.nextToken());
+
+최솟값을 구하는데 해당 수까지 가는 경우에 시간초과가 난다면
+이분탐색을 이용해야한다.
+
+
+left 와 right를 선언하고,
+mid값은 내가 원하는 값과 현재값의 비교를 통해 갱신.
+if target > cur 이면 시작값을 mid로 바꿔서 더 범위를 좁힌다.
+left = mid+1
+
+if target < cur이면 현재값이 줄어들어야 하므로 right를 줄인다.
+right = mid-1;
+
+while(left <= right)가 될때까지 반복한다.
+left가 right보다 커지면 원하는 값이 해당 left와 right사이에 없다는
+뜻이다.
