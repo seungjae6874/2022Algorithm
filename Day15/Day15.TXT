@@ -1,0 +1,55 @@
+import java.util.*;
+import java.io.*;
+
+public class Main{
+    public static void main(String[] args) throws IOException{
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+        StringTokenizer st= new StringTokenizer(br.readLine());
+        int[] arr = new int[2];
+        int n = Integer.parseInt(st.nextToken());
+        int m = Integer.parseInt(st.nextToken());
+        int[] num = new int[n];
+        StringTokenizer st2= new StringTokenizer(br.readLine());
+        for(int i =0; i < n; i++){
+            num[i] = Integer.parseInt(st2.nextToken());
+        }
+        Arrays.sort(num);
+        //정렬후 이진탐색으로 높이 찾기
+        int left = 0;
+        int right = num[n-1]; //최대 높이
+ 
+        bs(left,right,num,m);//m이 타겟
+        br.close();
+    }
+    public static void bs(int left, int right,int[] num, int target){
+        int mid= 0;
+        while(left <= right){
+            long sum=0;//잘린 나무들 합
+            mid = (left+right)/2;//자르게 되는 높이
+            for(int i =0; i<num.length; i++){
+                if(num[i] - mid > 0){
+                    sum += (num[i] - mid);
+                }
+            }
+            
+            
+            if(sum < target){
+                //더 잘라야함.  right 낮춤.
+                right = mid-1;
+            }
+            else{
+                //너무 많이 잘랐다. left를 높힘.
+                left = mid+1;
+            }
+//while문안에서 sum==target일 때 나가면 안되는 이유가 있다.
+// 이유는 절단기 설정높이의 최대값을 구하기 때문이다.
+//그렇지 않으면 설정높이가 최대가 아니어도 target과 같은 합이구해진다.
+따라서 right가 최대 절단기 높이이므로 right를 출력시킨다.
+            
+        }
+        System.out.println(right);
+        
+    }
+	
+}
