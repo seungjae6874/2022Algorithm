@@ -1,0 +1,20 @@
+트리에서 순회가 아닌
+노드의 부모들을 찾아내는 알고리즘이다.
+핵심은 dfs와 배열리스트를 생성함으로써 구현 가능.
+
+배열을 리스트인 arraylist<integer>[] 로 구현 하여 
+list[a]와 연결된 노드들을 배열로 담는 = [b,c]이런 형식으로 처리한다.
+list[a].add(b)
+list[b].add(a)를 통해 서로 연결됨을 찾아낸다.
+
+처음 부모노드는 1로 설정 잡고
+1의 부모는 0으로 처리하고 dfs를 돌린다.
+dfs에서는 반드시 parents배열의 [start]노드에 parent 값을 세팅
+즉 start노드의 부모는 parent이라는 것을 계속 처리해나간다.
+dfs는 for(int items : list[start])를 통해
+item이 parent노드와 같지 않으면 계속 dfs를 나올때까지 돌려서
+parent[start]에 parent 노드 즉 list[start]의 배열값중 하나인
+item을 start의 부모로 세팅해준다.
+
+
+이후 다 dfs가 끝나면 parents배열을 출력시키면 됨. 
