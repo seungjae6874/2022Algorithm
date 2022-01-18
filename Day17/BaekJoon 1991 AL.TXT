@@ -1,0 +1,58 @@
+// 트리 순회를 할때는 클래스를 통해서 붕어빵 틀찍기 처럼 사용할 것.
+
+
+전체 flow
+-> Tree 객체를 만들고
+-> Tree.add(루트, 왼, 오)를 넣는다.
+-> add 메소드에서 알아서 search메소드도 불러서 탐색하고 트리를 형성
+
+-> preorder. inorder postorder를 메소드로 만들어 출력만 시키면 됨.
+
+
+1. 필요한 클래스
+Node{
+char Data;
+Node Left, Right;
+public Node(char Data){
+this.Data = Data;
+} // 해당 노드를 설정해주기 위한 틀이 된다. 나자신과 함께 왼/오 노드가 존재
+
+Tree 클래스 //가장 중요 
+-> add함수 ( data=노드에 들어갈 값(숫자또는 문자), left_data, right_data)
+를 인자로 받는다.
+먼저 루트가 널이 아닌지 체크
+널이라면 -> data가 널이 아니면 data를 루트에 집어넣는다. Root = new Node(data)
+이렇게 루트가 생성됨.
+그리고 left_data가 널이 아니라면 -> 그 루트의 ROOT.LEFT = new Node(Left.data)를 넣는다.
+마찬가지로 오른쪽도 Root.Right = new Node(Rigth_Data)를 세팅
+// 여기까지 루트, 왼 , 오 데이터 노드 형성
+
+루트가 널이 아니면? 그다음을 탐색
+
+-> Search 함수 ( 루트, 데이터, left_data, right_data)를 인자로
+루트가 널이면? return; 탐색 끝
+
+Root.data 가 data와 같으면? 
+left_data != 널이면 Root.Left = new Node(left.DATA)로 계속 내려가면서
+왼쪽, 오른쪽 노드를 형성해간다.
+
+마지막으로 루트가 널도 아니고 데이터도 아니다? -> 
+그럼 현재를 지나쳐서 재귀 
+( Search(Root.Left(를 루트로 잡고내려가기),left_data, right_data)
+( Search(Root.Right(를 루트로), left_data, right_data)
+
+-> 순회는 재귀이다. 
+-> 선위 순회
+-> 루트가 먼저 출력
+-> preOrder(Root.left) 왼쪽 먼저
+-> preOrder(Root.right) 오른쪽 다음
+
+-> 중위 순회
+-> inOrder(Root.left) 왼쪽 먼저
+-> 루트가 중간
+-> inOrder(Root.right) 오른쪽 다음
+
+-> postOrder(Root.left) 왼쪽 먼저
+-> postOrder(Root.right) 오른쪽 다음
+-> 루트가 나중에 출력
+
