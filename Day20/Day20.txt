@@ -1,0 +1,50 @@
+import java.io.*;
+import java.util.*;
+
+public class Main{
+    static String tmp = "";
+    public static void main(String[] args) throws IOException{
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine());
+        String word = st.nextToken();
+        String[] words = new String[3];
+        //가능한 3 단어를 만들고
+        for(int i=1; i< word.length()-1; i++){
+            for(int j=i+1; j< word.length(); j++){
+                String a;
+                String b;
+                String c;
+                words[0] = word.substring(0,i);
+                words[1] = word.substring(i,j);
+                words[2] = word.substring(j,word.length());
+                //문자열 뒤집는 메소드
+                // StringBuffer를 사용
+                StringBuffer sb= new StringBuffer(words[0]);
+                StringBuffer sb2= new StringBuffer(words[1]);
+                StringBuffer sb3= new StringBuffer(words[2]);
+                a = sb.reverse().toString();
+                b = sb2.reverse().toString();
+                c = sb3.reverse().toString();
+                //가져와서 합친다.
+	   String temp = a+b+c;
+                if(i==1 & j==2){
+                    tmp = temp;
+                }
+                tmp = find(temp,tmp);
+            }
+        }
+        
+        // 이전 단어보다 앞이라면 바꾸고 아니면 그대로인 함수 생성
+        // 첫번째 단어를 출력
+        System.out.println(tmp);
+    }
+    public static String find(String temp,String tmp){
+        int compareResult = temp.compareTo(tmp);
+        //문자열을 비교할때는 str1.compareTo(str2)를 사용
+        //리턴값은 정수이다. 음수이면 str1이 str2보다 앞, 양수면 str2가 str1보다 앞 아니면 같음.
+        if(compareResult < 0){
+            tmp = temp;
+        }
+        return tmp;
+    }
+}

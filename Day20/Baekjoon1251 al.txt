@@ -1,0 +1,30 @@
+//이번 문제의 핵심은
+// 문자를 3개로 어떻게 나눌 것인가? 반복문을 어떻게 형성 할 것인가?
+
+//각 단어가 길이 1이상이려면?
+// 첫번째 단어는 0부터 i까지
+//두번째 단어는 i부터 j까지
+//세번째 단어는 j부터 str.length()까지가 될 것이다.
+
+그렇다면? 길이 1이상이니까 i= 1부터 -> str.length()-1 까지
+j = i+1부터 str.length()까지면 된다.
+String문자열에 대한 자바의 쪼개기는
+str.substring(i,j)이다. i~부터 j-1까지의 문자를 담는다.
+
+//그리고나서 핵심은 각 문자를 뒤집기
+//어떻게 뒤집을 것인가? -> 매우 중요-> 자바의 StringBuffer를 사용하자.
+뒤집을 문자열을 설정. words
+StringBuffer sb = new StringBuffer(words);
+우선 sb에 문자열을 담고,
+newwords = sb.reverse()메소드를 사용가능 //대신 이 sb.reverse()는 타입이 없으므로 toString() 필요
+newwords = sb.reverse().toString();
+이러면 newwords는 words를 뒤집은 문자열이되고 복잡도를 줄일 수 있다.
+
+//이후에 중요한 부분.
+문자열 a와 b의 사전적 순서 비교는 어떻게 하는가?
+*** a.compareTo(b) 메소드를 사용한다.
+해당 값은 정수 값을 리턴한다.
+만약 int n = a.compareTo(b) 이고 
+n이 음수라면 ? -> a가 b보다 앞에 위치
+n이 양수라면? -> a가 b보다 사전적으로 뒤이다.
+n이 0이면? -> a와 b가 같은 단어이다.
