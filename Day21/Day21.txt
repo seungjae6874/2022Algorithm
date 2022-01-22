@@ -1,0 +1,45 @@
+import java.util.*;
+import java.io.*;
+
+public class Main{
+    public static void main(String[] args) throws IOException{
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int n = Integer.parseInt(br.readLine());
+        StringTokenizer st;
+        int[][] arr = new int[n][5];
+        int maxStudent = 0; //같은반이었던 학생 수들
+        int leader= 0; //임시반장
+        for(int i =0; i <n; i++){
+            st = new StringTokenizer(br.readLine());
+            for (int j=0; j < 5; j++){
+                arr[i][j] = Integer.parseInt(st.nextToken());
+            }
+            
+        }
+        
+        //다른 학생들과 같은반이었던 적 있느지 체크
+        for(int i =0; i < n; i++){
+            Set<Integer> sameClass = new HashSet<>();//중복을 제거할때는 HashSet을 사용하자
+            //hashset을 반복문 안에서 선언함은
+            //각 학생별 같은반이엇던 학생들을 담기위해서이고
+            //i번째 학생일때 같은반 친구들을 담고나서 그다음 i+1일때
+            //해시셋 다시 리셋
+            for(int j=0; j < 5; j++){
+                for(int k = 0; k < n; k++){
+                    //i와 k는 달라야하고, i와 같은반인 학생들을 i의 set에 담는다.
+                    if((i != k) & (arr[i][j] == arr[k][j])){
+                        sameClass.add(k);    
+                    }
+                    
+                }
+            }
+            //같은반인 학생 가장 많은 학생 계속 갱신하기
+            if(maxStudent < sameClass.size()){
+                maxStudent = sameClass.size();
+                leader = i; //임시반장 후보 갱신
+            }
+        }
+        System.out.println(leader+1); //왜냐면 1반부터 시작
+        br.close();
+    }
+}
