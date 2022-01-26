@@ -1,0 +1,56 @@
+import java.util.*;
+import java.io.*;
+
+public class Main{
+    public static void main(String[] args) throws IOException{
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine());
+        int s = Integer.parseInt(st.nextToken());
+        StringTokenizer st2 = new StringTokenizer(br.readLine());
+        int[] ss = new int[s];
+        for(int i=0; i < s; i++ ){
+            ss[i] = Integer.parseInt(st2.nextToken());
+        }
+        Arrays.sort(ss);
+        StringTokenizer st3 = new StringTokenizer(br.readLine());
+        int n = Integer.parseInt(st3.nextToken());
+        int flag= 0;
+        int min = -1;
+        int max = 10000;
+        for (int i =0; i<s; i++){
+            if(ss[i] < n){
+                min = ss[i];
+            }
+            else if(ss[i] > n){
+                if(max > ss[i]){
+                    max = ss[i];
+                }
+            }else{
+                System.out.println(0);
+                return;
+            }
+            if((min != -1) & ( max != 10000)){
+                break;
+            }
+        }
+        if(min == -1){
+            min =0;
+            
+        }if(max == 10000){
+            max = 1001;
+        }
+        int answer = 0;
+        for(int i = min+1; i<max; i++){
+            if(i>n){
+                break;
+            }
+            for(int j = n; j < max; j++){
+                if (i ==j){
+                    continue; //[n,n]  구간은 없으므로
+                }
+                answer += 1;
+            }
+        }
+        System.out.println(answer);
+    }
+}
