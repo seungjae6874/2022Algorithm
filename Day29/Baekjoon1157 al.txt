@@ -1,0 +1,17 @@
+문제는 상당히 간단하지만
+Hashmap의 사용법과
+key만 가져오기 
+Set<키 타입> keyset= map.keySet();
+선언 후 
+for( 타입  s : keyset){
+}를 통해 키 값과 함께 value 값도 map.get(s)로 처리 가능.
+
+또한 모두 대문자로, 모두 소문자로 등의 처리를 하기위해
+str.toUpperCase()
+toLowerCase()등을 다룬다.
+
+key와 value 두가지를 함께 다루려면
+Set<Entry<키타입,밸류타입>> entryset = map.entrySet();
+이후 
+for문에서도 (Entry<키타입, 밸류타입> S : entryset)
+s.getKey(), s.getValue()를 통해 다루면 된다.

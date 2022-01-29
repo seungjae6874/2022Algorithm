@@ -1,0 +1,52 @@
+import java.io.*;
+import java.util.*;
+import java.util.Map.Entry;
+import java.util.Set;
+
+public class Main{
+    public static void main(String[] args) throws IOException{
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine());
+        String a =  st.nextToken();
+        a  = a.toUpperCase();
+        HashMap<Character,Integer> map = new HashMap<Character,Integer>();
+        int cnt=0;
+        for(int i =0; i < a.length(); i++){
+          map.put(a.charAt(i),cnt);
+        }
+        for(int i =0; i < a.length(); i++){
+          map.put(a.charAt(i),map.get(a.charAt(i))+1);
+        }
+        Set<Character> keyset = map.keySet();
+        int big = map.get(a.charAt(0));
+        int temp=0;
+        for(Character i : keyset){
+            
+            temp = map.get(i); 
+            if(temp > big){
+              big= temp;  
+            }
+            
+        }
+        Set<Entry<Character,Integer>> entryset1 = map.entrySet();
+        int check=0;
+        for(Entry<Character,Integer> s : entryset1){
+          if(s.getValue() == big){
+            check ++;
+          }
+        }
+        if(check>1){
+          System.out.println('?');
+        }
+        else{
+          Set<Entry<Character,Integer>> entryset = map.entrySet();
+          for(Entry<Character,Integer> entry : entryset){
+            if(entry.getValue().equals(big)){
+              System.out.println(entry.getKey());
+            }
+          }
+          
+        }
+        
+    }
+}
