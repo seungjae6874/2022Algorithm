@@ -1,0 +1,29 @@
+import java.io.*;
+import java.util.*;
+
+public class Main{
+    public static void main(String[] args) throws IOException{
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine());
+        int a =  Integer.parseInt(st.nextToken());
+        
+        //n이 몇번째인지 찾기위해 반복문 돌기
+        //
+        int cnt = 0;
+        int n = 0;
+        while(true){
+          n++;
+          cnt += a;
+          if(cnt >= a){
+              if(n%2==0){
+                System.out.println(a-cnt+n+"/"+(cnt-a+1));
+              }
+              else{
+                System.out.println((cnt-a+1)+"/"+(a-cnt+n));
+              }
+              break;
+          }
+          
+        }
+    }
+}
