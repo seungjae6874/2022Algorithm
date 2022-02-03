@@ -1,0 +1,65 @@
+import java.util.*;
+import java.io.*;
+
+
+public class Main {
+  public static void main(String[] args) throws IOException {
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    StringTokenizer st = new StringTokenizer(br.readLine());
+    int n = Integer.parseInt(st.nextToken());
+    int m = Integer.parseInt(st.nextToken());
+    int colans = 0;
+    int rowans = 0;
+    boolean [][] arr = new boolean[n][m];
+    for(int i = 0; i <n; i++){
+      String str = br.readLine();
+      for(int j =0; j < m; j++){
+        if(str.charAt(j) == '.'){
+          arr[i][j] = false;
+        }
+        else{
+          arr[i][j] = true;
+        }
+      }
+      
+    }
+    //행검사
+    for(int i =0; i<n; i++){
+      int cnt = 0;
+      for(int j =0; j<m; j++){
+        if(arr[i][j] == false){
+          cnt++;
+        }
+        
+        
+      }
+      if(cnt == m){
+        rowans+=1;
+      }
+    }
+    //열검사
+    for(int i =0; i<m; i++){
+      int cnt = 0;
+      for(int j =0; j<n; j++){
+        if(arr[j][i] == false){
+          cnt++;
+        }
+        
+        
+      }
+      if(cnt == n){
+        colans+=1;
+      }
+    }
+    //최소한의 경비이므로
+    //행 추가 경비원과 열 추가경비원중
+    //큰 값을 갖는다.
+    if(rowans >= colans){
+      System.out.println(rowans);
+    }
+    else{
+      System.out.println(colans);
+    }
+    
+  }
+}
