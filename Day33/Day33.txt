@@ -1,0 +1,85 @@
+import java.util.*;
+import java.io.*;
+
+public class Main {
+  public static void main(String[] args) throws IOException {
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    String name = br.readLine();
+    int [] yd = new int[4];
+    for(int i =0; i < name.length(); i++){
+      if(name.charAt(i) == 'L'){
+        yd[0]++;
+      }
+      if(name.charAt(i)=='O'){
+        yd[1]++;
+      }
+      if(name.charAt(i) =='V'){
+        yd[2]++;
+      }
+      if(name.charAt(i)=='E'){
+        yd[3]++;
+      }
+    }
+    int n = Integer.parseInt(br.readLine());
+    int[][] team = new int[n][4];
+    int [] ans = new int[n];//결과값
+    String[] mem = new String[n];//멤버담기
+    String[] mem2 = new String[n];
+    //n은 팀의 수, 4는 love체크
+    for(int i =0; i < n; i++){
+        String t = br.readLine();
+        mem[i] = t;
+        mem2[i] = t;
+        for(int j =0; j < t.length(); j++){
+          if(t.charAt(j) == 'L'){
+            team[i][0]++;
+            
+          }
+          if(t.charAt(j) == 'O'){
+            team[i][1]++;
+          }
+          if(t.charAt(j) == 'V'){
+            team[i][2]++;
+          }
+          if(t.charAt(j) == 'E'){
+            team[i][3]++;
+          }
+            
+      }
+      ans[i] = ((team[i][0]+team[i][1]+yd[0]+yd[1]) * (team[i][0]+team[i][2]+yd[0]+yd[2]) * (team[i][0]+team[i][3]+yd[0]+yd[3]) * (team[i][1]+team[i][2]+yd[1]+yd[2]) *
+      (team[i][1]+team[i][3]+yd[1]+yd[3]) * (team[i][2]+team[i][3]+yd[2]+yd[3]));
+      ans[i] = (ans[i] % 100);
+      
+    }
+    int temp = ans[0];
+    ArrayList<String> a = new ArrayList<String>();
+    int idx=0;
+    for(int i =0; i < n; i++){
+        if(i>0){
+          if(ans[i] >= temp){
+            temp = ans[i];
+            idx = i;
+            
+          }
+        }
+    }
+    for(int i =0; i < n; i++){
+        if(ans[i] == temp){
+          a.add(mem2[i]);
+        }
+    }
+
+    
+    if(temp == 0){
+      
+      Arrays.sort(mem);
+      System.out.println(mem[0]);
+    }
+    else{
+      Collections.sort(a);
+      System.out.println(a.get(0));
+    }
+  }
+  
+
+}
