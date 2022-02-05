@@ -1,0 +1,6 @@
+숫자를 뒤집어야 할 때는
+STRING으로 숫자를 받고, CHARAT(I)을 통해 뒤집어서
+다른 CHARACTER 배열에 담는게 편하다. 아니면
+다른 STRING += 로 담아서 저장하면 된다.
+숫자를 string으로 변환하는 방법은
+string st = String.valueOf(intnum)으로 처리
