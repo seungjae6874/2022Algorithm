@@ -1,0 +1,57 @@
+import java.io.*;
+import java.util.*;
+
+public class Main {
+  public static void main(String[] args) throws IOException{
+    int n=-1;
+    int cnt = 0;
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    int idx = 1;
+    while(true){
+
+      
+      StringBuilder sb = new StringBuilder();
+      sb.append("Group "+idx+"\n");
+      n = Integer.parseInt(br.readLine());
+      if(n==0){
+        break;
+        
+      }
+      cnt+=1;
+      String [] name = new String[n];
+      String rev[][] = new String[n][n];//받은 종이
+      int kind = 0;
+      int chkr = 0;
+      for(int i = 0; i < n; i++){
+        String str[] = br.readLine().split(" ");
+        rev[i] = str;
+      } 
+      for(int i = 0; i<n; i++){
+        for(int a = 0; a<n; a++){
+          //i를 제외하고 담아야한다.
+          
+            
+            if(rev[i][a].equals("N")){
+              chkr = i-a;
+              if(chkr < 0){
+                chkr += n;
+              }
+              sb.append(rev[chkr][0] +" was nasty about "+rev[i][0]+"\n");
+              kind +=1;
+            }
+        }
+      }
+          
+ 
+      if(kind == 0){
+          sb.append("Nobody was nasty"+"\n");
+      }
+      System.out.println(sb); 
+      idx++;
+    }
+
+     
+
+  }
+    
+}
