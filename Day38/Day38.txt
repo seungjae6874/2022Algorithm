@@ -1,0 +1,60 @@
+import java.util.*;
+import java.io.*;
+public class Main {
+  public static void main(String[] args) throws IOException {
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    StringBuffer ssbb = new StringBuffer();
+    ArrayList<String> ars = new ArrayList<>();
+    int t = Integer.parseInt(br.readLine());
+    for(int i=0; i<t;i++){
+      String ch = br.readLine();
+      StringTokenizer st = new StringTokenizer(br.readLine());
+      int n = Integer.parseInt(st.nextToken());
+      int m = Integer.parseInt(st.nextToken());
+
+      ArrayList<Integer> sj = new ArrayList<Integer>(); //세준병사
+      ArrayList<Integer> sb = new ArrayList<Integer>(); //세비 병사
+      StringTokenizer ss = new StringTokenizer(br.readLine());
+      for(int a=0;a<n;a++){
+        sj.add(Integer.parseInt(ss.nextToken()));
+      
+      }
+      StringTokenizer tt = new StringTokenizer(br.readLine());
+      for(int b=0;b<m;b++){
+        sb.add(Integer.parseInt(tt.nextToken()));
+        
+      }
+      Collections.sort(sj);
+      Collections.sort(sb);
+      /*for(Integer item : sj){
+        System.out.println(item);
+      }
+      for(Integer item2 : sb){
+        System.out.println(item2);
+      }*/
+      int sjmin = sj.get(0);//세준 약자
+      int sjmax = sj.get(n-1);
+      int sbmin = sb.get(0);//세비 약자
+      int sbmax = sb.get(m-1);
+      //결국 가장 힘 큰 병사 있는 쪽이 이기는데
+      //sj,sb 모든 값이 동일하면 sj 승리
+      if(sbmax > sjmax){
+        ssbb.append("B");
+        ars.add("B");
+        //System.out.println('B');
+      }
+      else{
+        //세준 최대값이 크거나 같으면 무조건
+        //System.out.println('S');
+        ssbb.append("S");
+        ars.add("S");
+      }
+        
+    }
+    
+    for(String st : ars){
+      System.out.println(st);
+    }
+    br.close();
+  }
+}
