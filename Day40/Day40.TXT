@@ -1,0 +1,75 @@
+import java.io.*;
+import java.util.*;
+
+public class Main {
+  public static void main(String[] args) throws IOException{
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    int n = Integer.parseInt(br.readLine());
+    Character [][] arr = new Character[n][n]; 
+    
+
+    for(int i =0 ; i<n; i++){
+      String st;
+      st = br.readLine();
+      for(int j = 0; j<n; j++){
+        arr[i][j] = st.charAt(j);
+        
+      }
+    }
+    //무조건 2개이상만 이어지면 된다 가로한번
+    int rans =0;
+    int cans = 0;
+    
+    for(int i =0; i<n;i++){
+      int rcnt = 0;
+      
+      for(int j =0 ; j<n;j++){
+        //seat을 늘리다가, 벽 만나면 
+        //그전까지 seat좌석 몇개인지 체크
+        if(arr[i][j] == '.'){
+          rcnt++;
+        }
+        else{
+          if(rcnt>=2){
+            //눕기 가능
+            rans++;
+          }
+          rcnt = 0;
+          //눕기가능하면 다시 초기화
+        }
+
+        
+      }
+      //벽만난경우
+      if(rcnt >=2){
+        //눕기 가능
+        rans++;
+      }
+      
+    }
+    for(int i = 0; i<n; i++){
+      int ccnt = 0;
+      for(int j = 0; j<n; j++){
+        if(arr[j][i] == '.'){
+         ccnt++; 
+        }
+        else{
+          if(ccnt >=2){
+            cans++;
+          }
+          ccnt =0;
+          //눕기갯수 세고 다시 초기화
+        }
+      }
+      if(ccnt >= 2){
+        cans++;
+      }
+    }
+
+    System.out.print(rans);
+    System.out.print(' ');
+    System.out.println(cans);
+    
+    br.close();
+  }
+}
