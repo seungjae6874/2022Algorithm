@@ -1,0 +1,29 @@
+import java.util.*;
+import java.io.*;
+
+public class Main {
+  public static void main(String[] args)throws IOException {
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    int n = Integer.parseInt(br.readLine());
+    double [] arr = new double[n];
+    
+    StringTokenizer st = new StringTokenizer(br.readLine());
+    for(int i =0;i<n;i++){
+      arr[i] = Double.parseDouble(st.nextToken());
+    
+    }
+    Arrays.sort(arr);
+    double maxnum = arr[n-1];//최대값
+    
+    for(int i =0; i<n; i++){
+      arr[i] = (arr[i]/maxnum)*100;
+      
+    }
+    double avg = 0;
+    for(int a=0; a<n; a++){
+      
+      avg += arr[a];
+    }
+    System.out.println(avg/n);
+  }
+}
