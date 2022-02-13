@@ -1,0 +1,59 @@
+import java.util.*;
+import java.io.*;
+
+public class Main {
+  public static boolean [][] arr;
+  public static int min = 64;
+
+  public static void main(String[] args) throws IOException{
+    BufferedReader br =new BufferedReader(new InputStreamReader(System.in));
+    StringTokenizer st = new StringTokenizer(br.readLine());
+    int n = Integer.parseInt(st.nextToken());
+    int m = Integer.parseInt(st.nextToken());
+    
+    arr = new boolean[n][m];
+    
+    for(int i = 0; i <n; i++){
+      String r = br.readLine();
+      
+      for(int j=0; j<m; j++){
+        if(r.charAt(j) == 'W'){
+          arr[i][j] = true;
+        }
+        else{
+          arr[i][j] = false;
+        }
+      }
+      
+    }
+    int nrow = n-7;
+    int ncol = m-7;
+    for(int i =0; i <nrow; i++){
+      for(int j=0; j<ncol; j++){
+        find(i,j);
+      }
+    }
+    System.out.println(min);
+   br.close(); 
+  }
+  public static void find(int x, int y){
+    int endx = x+8;
+    int endy = y+8;
+    int count = 0;
+    boolean tf = arr[x][y];
+    for(int i =x;i<endx;i++){
+      for(int j =y; j<endy; j++){
+        if(arr[i][j] != tf){
+         //체크판과 다르면
+          count++;
+        }
+        //다음칸 색이 바뀌어야하므로
+        //tf를 true이면 담칸은 false로 바꾸기
+        tf = (!tf);
+      }
+      tf = (!tf); //다시 또 바꾸기
+    }
+    count = Math.min(count,64-count);
+    min = Math.min(min,count);
+  }
+}
