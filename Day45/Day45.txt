@@ -1,0 +1,50 @@
+import java.io.*;
+import java.util.*;
+
+public class Main {
+  public static void main(String[] args) throws IOException {
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    StringTokenizer st = new StringTokenizer(br.readLine());
+    int n = Integer.parseInt(st.nextToken());
+    int k = Integer.parseInt(st.nextToken());
+    int g =k-1; //기준수
+    Queue<Integer> q = new LinkedList<>();
+    //배열에 담고
+    for(int i = 1; i<n+1; i++){
+      q.add(i);//push
+      //q.remove() 가 top을 pop
+      //q의 top은 q.peek()
+    }
+    //queue를 사용하면 상당히 편함.
+    //k-1번 pop해서
+    //뒤에다가 k-1번 push하고
+    //top을 제거
+    ArrayList<Integer> ans = 
+      new ArrayList<Integer>();
+     while(ans.size() <n){
+       
+        for(int a=0; a<k-1;a++){
+          //k번 pop하고
+          int top = q.peek();
+          q.remove(); //앞에서 빼서
+          q.add(top); //뒤에 다시 넣기
+        }
+       //이제 top을 ans에 넣고
+       ans.add(q.peek());
+       //top 삭제
+       q.remove();
+     }
+    System.out.print("<");
+    int cnt = 0;
+    for(Integer item: ans){
+      System.out.print(item);
+      cnt++;
+      if(cnt < n){
+        System.out.print(", ");
+        }
+      
+      }
+    System.out.print(">");
+    br.close();
+  }
+}

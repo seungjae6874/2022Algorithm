@@ -1,0 +1,9 @@
+처음으로 자바에서 queue를 써보았다.
+
+별거없다.
+큐 선언
+Queue<타입> q = new LinkedLIst<>(); 링크드리스트로 생성해야한다.
+
+top참조하기 -> q.peek();
+pop하기 -> q.remove();
+push하기 -> q.add(value);
