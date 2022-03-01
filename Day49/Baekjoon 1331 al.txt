@@ -1,0 +1,20 @@
+시뮬레이션 문제 즉 완전 탐색문제이다.
+
+파악조건 1. 한번에 이동 몇칸 가능한지?
+-> A와 숫자로 이루어져있고 최대 2칸씩까지 가능하다.
+
+파악조건 2. 이동좌표가 가능하다면 해당 nextx, nexy에 대해 visited true체크해준다.
+
+파악조건 3. 다음 좌표를찾았다면 cur현재좌표를 next좌표로 갱신해준다.
+
+next가 이동 가능한 좌표라면 isvalid를 true로 주고
+next가 이동 불가한 좌표라면? isvalid 는 false로 놔둔다.
+
+위의 반복문이 다 돌았다면? (시작점에서 끝점까지 next 좌표로 갱신해가면서,
+visited 도 갱신처리하고 나서
+
+마지막으로 현재 cur좌표에서 시작점 좌표로 돌아올 수 있는지 체크해야한다.
+nextx = curx +dx[j]
+nexty = cury +dy[j]했을때
+nextx = startx && nexty = starty 이면 isvalid 는 true이고 아니면 그대로
+isvalid는 false이다.

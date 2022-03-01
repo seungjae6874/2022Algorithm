@@ -1,0 +1,61 @@
+import java.util.*;
+import java.io.*;
+
+public class Main {
+  public static void main(String[] args) throws IOException{
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    int[] dx = {-2,-2,-1,-1,1,1,2,2};
+    int[] dy = {-1,1,-2,2,-2,2,-1,1};
+    int stx, sty,curx,cury,nextx,nexty, tox,toy;
+    boolean[][] visited = new boolean[6][6];
+    boolean isvalid;
+    
+    String st = br.readLine();
+    stx = 5-(st.charAt(1)-'1');
+    sty = st.charAt(0)-'A';
+    curx = stx;
+    cury = sty;
+    visited[curx][cury] = true;
+    
+    for(int i =1; i<36; i++){
+      String stt = br.readLine();
+      tox = 5-(stt.charAt(1)-'1');
+      toy = stt.charAt(0)-'A';
+
+      isvalid = false;
+      for(int j = 0; j<8; j++){
+        nextx= curx + dx[j];
+        nexty = cury +dy[j];
+        if(nextx < 0 || nextx >=6 || nexty < 0 || nexty >= 6){
+          continue; 
+        }
+        if(nextx == tox && nexty == toy && !visited[nextx][nexty]){
+          visited[nextx][nexty] = true;
+          curx = nextx;
+          cury = nexty;
+          isvalid = true;
+          break;
+        }
+      }
+      if(!isvalid){
+        System.out.println("Invalid");
+        return;
+      }
+    }
+    for(int k = 0; k <8; k++){
+        nextx = curx +dx[k];
+        nexty = cury+dy[k];
+        if(nextx <0 || nextx >=6 || nexty <0 || nexty >=6){
+          continue;
+        }
+        if(nextx == stx && nexty == sty){
+          System.out.println("Valid");
+          return;
+        }
+    }
+    
+    
+    System.out.println("Invalid");
+    br.close();
+  }
+}

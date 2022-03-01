@@ -1,0 +1,79 @@
+import java.io.*;
+import java.util.*;
+
+public class Main {
+  public static void main(String[] args) throws IOException {
+    //해당 년도가 윤년인지, 아닌지
+    //4로 나누어지면 윤년
+    //4로나누어지고 100으로 되면 평년
+    //4 100 400이면 윤년
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    StringTokenizer st = new StringTokenizer(br.readLine());
+    int year = 0;
+    int month = 0;
+    int day = 0;
+    int hour = 0;
+    int min = 0;
+    
+    
+    String mon = st.nextToken();
+    String[] m = {"January","February","March","April","May","June","July","August","September","October","November","December"};
+    for(int i =0; i<12; i++){
+      if(mon.equals(m[i])){
+        month = i+1;
+      }
+    }
+    
+    String d = st.nextToken();
+    
+    day = Integer.parseInt(d.substring(0,2));
+    year = Integer.parseInt(st.nextToken());
+    String hm = st.nextToken();
+    hour = Integer.parseInt(hm.substring(0,2));
+    min = Integer.parseInt(hm.substring(3,5));
+
+    
+    int isyn = 0;
+    if(year % 400 == 0 || (year%4 == 0 && year%100 !=0)){
+      isyn = 1;
+    }
+    int[] yn = {31,29,31,30,31,30,31,31,30,31,30,31};
+    int[] nyn = {31,28,31,30,31,30,31,31,30,31,30,31};
+    
+    int totalday =0;//지금까지이 일수합산
+    if(isyn ==1){
+      //윤년
+      for(int i =0; i<month-1;i++){
+        totalday+=yn[i];
+      }
+    }else{
+      for(int j =0; j<month-1; j++){
+        totalday+=nyn[j];
+      }
+    }
+    totalday += day-1;
+    //이제 일수까지 찾았으므로 일수를 분으로 바꾸자
+    double totalhour = totalday*24*60;
+    //당일 흐른 시간도 합산
+    totalhour += (hour*60);
+    totalhour += min;
+    //해당 년의 전체 분 구하기
+    
+    double fullday = 0;
+    double fullmin = 0;
+    if(isyn == 1){
+      for(int a = 0; a<12; a++){
+        fullday += (yn[a]);
+      }
+      fullmin = fullday*60*24;
+    }else{
+      for(int b = 0; b<12; b++){
+        fullday +=(nyn[b]);
+      }
+      fullmin = fullday*60*24;
+    }
+    double ans = (totalhour/fullmin)*100;
+    System.out.println(ans);
+    
+  }
+}
