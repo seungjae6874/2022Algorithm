@@ -1,0 +1,63 @@
+import java.util.*;
+import java.io.*;
+import java.util.Map;
+
+public class Main {
+  public static void main(String[] args) throws IOException {
+    int n = -1;
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    HashMap<Integer,String> map = new HashMap<Integer,String>();
+    HashMap<Integer,String> fullmap = new HashMap<Integer,String>();
+    int cnt = 0;
+    while(true){
+      n = Integer.parseInt(br.readLine());
+      if(n == 0){
+        
+        for(Map.Entry<Integer,String> entryset : map.entrySet()){
+          System.out.print(entryset.getKey());
+          System.out.print(' ');
+          System.out.println(entryset.getValue());
+        }
+        break;
+      }
+      else{
+        for(int i =0 ; i<n; i++){
+          String name = br.readLine();
+          fullmap.put(i+1,name);
+          
+        }//여기까지 이름과 순번 저장 전체 리스트
+        //2n-1줄 입력
+        int [] geta = new int[n+1];
+        int [] getb = new int[n+1];
+        for(int j=0; j<2*n-1; j++){
+          StringTokenizer st = new StringTokenizer(br.readLine());
+          int a = Integer.parseInt(st.nextToken());
+          String b= st.nextToken();
+          //0번 제외 1부터 입력을 확인하는데
+          //A만 담는 학생리스트와
+          //B만 담는 학생리스트를 만들어서
+          //나중에 A와 B리스트 둘중 하나만 있는 학생을 map에 idx와 이름을 저장.
+          //이름은 fullmap에서 key로 가져온다.
+          
+          if(b.charAt(0) == 'A'){
+            geta[a] = 1;
+          }else{
+            getb[a] = 1;
+          }
+          
+        }
+        //이제 geta와 getb에서 하나만 1인 인덱스를 찾아낸다.
+        for(int k=1; k<n+1;k++){
+          if((geta[k] == 1) &&(getb[k] != 1)){
+            map.put(++cnt,fullmap.get(k));
+          }
+          else if((getb[k] == 1) &&(geta[k] != 1)){
+            map.put(++cnt,fullmap.get(k));
+          }
+        }
+      }
+      
+    }
+    br.close();
+  }
+}
