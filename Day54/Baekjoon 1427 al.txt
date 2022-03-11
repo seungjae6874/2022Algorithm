@@ -1,0 +1,4 @@
+알고리즘이라기보다
+Char to int 는 Character.getNumericValue()를 사용하자.
+그냥 String으로 받아서 int배열에 담고 정렬해서
+거꾸로 출력하면 끝남.
